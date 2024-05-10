@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 23:16:38 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/05/03 20:14:48 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/09 17:58:58 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,10 @@ LIBFT_DIR = libft
 ### UTILS
 
 UTILS_DIR = Mandatory/
-UTILS_S = $(addprefix $(UTILS_DIR), pipex.c	)
+UTILS_S = $(addprefix $(UTILS_DIR), utils.c \
+									ft_child_1.c\
+									ft_child_2.c\
+									)
 
 UTILS_O = $(UTILS_S:.c=.o)
 
@@ -37,7 +40,6 @@ UTILS_O = $(UTILS_S:.c=.o)
 # B_UTILS_O = $(B_UTILS_S:.c=.o)
 
 #_________________________________________________________
-bonus:$(BNAME)
 
 all: $(NAME)
 
@@ -45,6 +47,7 @@ $(NAME):mandatory/$(NAME).c $(LIBFT) $(UTILS_O)
 	@$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(UTILS_O) mandatory/$(NAME).c -o $(NAME)
 
 
+# bonus:$(BNAME)
 # $(BNAME):Bonus/$(BNAME).c $(LIBFT) $(B_UTILS_O)
 # 	@$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(B_UTILS_O) Bonus/$(BNAME).c -o $(BNAME)	
 #_________________________________________________________
