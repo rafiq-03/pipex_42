@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:38:31 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/09 17:42:33 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/11 22:16:29 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ void    check_command_line(int ac, char **av, char **envp)
 	}
 }
 
-char **search_paths(char **envp)
+void	search_paths(t_pipex *pipex, char **envp)
 {
 	int i;
 	char *path;
-	char **r_path;
 
 	i = 0;
 	while (envp[i])
@@ -39,8 +38,14 @@ char **search_paths(char **envp)
 			}
 			i++;
 	}
-	r_path = ft_split(path, ':');
-	return (r_path);
+	if (ft_strlen(path) == 0)
+		printf("what the hell this path is ainvalid\n");
+	pipex->path = ft_split(path, ':');
+	if (!pipex->path)
+	{
+		printf("we have problem with search path\n");
+		exit (1);
+	}
 }
 
 void	ft_free(char **s)

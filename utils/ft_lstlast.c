@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_prev_last.c                                 :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/28 17:19:31 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/04/28 17:19:32 by rmarzouk         ###   ########.fr       */
+/*   Created: 2023/12/24 13:26:59 by rmarzouk          #+#    #+#             */
+/*   Updated: 2024/05/11 21:10:11 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../Mandatory/pipex.h"
 
-t_list	*ft_prev_last(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
 	if (lst)
 	{
-		while (lst->next)
+		while (lst->next != NULL)
 		{
-			if (lst->next->next == NULL)
-				return (lst);
 			lst = lst->next;
 		}
+		return (lst);
 	}
 	return (NULL);
 }

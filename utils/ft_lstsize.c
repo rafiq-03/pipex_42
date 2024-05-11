@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/23 13:35:28 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/04/21 15:30:31 by rmarzouk         ###   ########.fr       */
+/*   Created: 2023/12/24 13:11:36 by rmarzouk          #+#    #+#             */
+/*   Updated: 2024/05/11 22:17:51 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../Mandatory/pipex.h"
 
-t_list	*ft_lstnew(int nb)
+int	ft_lstsize(t_list *lst)
 {
-	t_list		*node;
+	int	i;
 
-	node = malloc (sizeof(t_list));
-	if (node == NULL)
-		return (NULL);
-	node -> nb = nb;
-	node -> next = NULL;
-	return (node);
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
