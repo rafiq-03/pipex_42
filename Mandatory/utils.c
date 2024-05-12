@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:38:31 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/12 18:15:19 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/12 19:19:33 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    check_command_line(int ac, char **av, char **envp)
 {
 	(void)av;
 	(void)envp;
-	if (ac != 5)
+	if (ac < 5)
 	{
 		ft_putendl_fd("Invalid arguments", 2);
 		exit(EXIT_FAILURE);
@@ -58,9 +58,18 @@ void	init_struct(t_pipex *pipex, int ac, char **av)
 	pipex->tmp1 = NULL;
 	pipex->tmp2 = NULL;
 	if (-1 == (pipex->infile_fd = open(av[1], O_RDONLY)))
-		printf("error : open infile\n");
+	{
+		ft_putstr_fd("bash : ", 2);
+		ft_putstr_fd(av[1], 2);
+		ft_putendl_fd(": No such file or  directory", 2);
+	}
 	if (-1 == (pipex->outfile_fd = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666)))
-		printf("error : open outfile\n");
+	{
+		ft_putstr_fd("bash : ", 2);
+		ft_putstr_fd(av[ac - 1], 2);
+		ft_putendl_fd(": No such file or directory", 2);
+		exit (EXIT_FAILURE);
+	}
 	printf("in_file : %d\t out_file : %d\n", pipex->infile_fd , pipex->outfile_fd);
 	pipex->pfd = malloc((ac - 4) * sizeof(int*));
 	while (pipex->i < ac - 4)

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:20:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/12 18:25:40 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/12 19:56:54 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,32 @@ void	first_command(t_pipex *pipex, char *av_2)
 		return;
 	first->command = ft_split(av_2, ' '); // I want to make a split function for this shit 		
 	first->c_name = first->command[0];
-	first->command[0] = ft_strjoin("/", first->c_name);
-	tmp = first->command[0];
-	while (pipex->path[++pipex->i])
+	if (!ft_strchr(first->c_name, '/'))
 	{
-		first->command[0] = ft_strjoin(pipex->path[pipex->i], tmp);
-		if (access(first->command[0], F_OK | X_OK) == 0)
+		first->command[0] = ft_strjoin("/", first->c_name);
+		tmp = first->command[0];
+		while (pipex->path[++pipex->i] && pipex->path_falg)
 		{
-			first->flag = 1;
-			break;
+			first->command[0] = ft_strjoin(pipex->path[pipex->i], tmp);
+			if (access(first->command[0], F_OK | X_OK) == 0)
+			{
+				first->flag = 1;
+				break;
+			}
+			if (!first->flag && pipex->path[pipex->i + 1])
+				free(first->command[0]);
 		}
-		if (!first->flag && pipex->path[pipex->i + 1])
-			free(first->command[0]);
+		first->index = 0;
+		pipex->command = first;
+		free(tmp);
 	}
-	pipex->command = first;
-	free(tmp);
+	else
+	{
+		if (access(first->c_name, F_OK | X_OK) == 0)
+			first->flag = 1;
+		pipex->command = first;
+	}
+	
 }
 void	other_commands(t_pipex *pipex, char **av, int ac)
 {
@@ -56,20 +67,28 @@ void	other_commands(t_pipex *pipex, char **av, int ac)
 		node = ft_lstnew();
 		node->command = ft_split(av[pipex->j], ' '); // I want to make a split function for this shit 		
 		node->c_name = node->command[0];
-		node->command[0] = ft_strjoin("/", node->c_name);
-		pipex->tmp1 = node->command[0];
-		while (pipex->path[++pipex->i])
+		if (!ft_strchr(node->c_name, '/'))
 		{
-			node->command[0] = ft_strjoin(pipex->path[pipex->i], pipex->tmp1);
-			if (access(node->command[0], F_OK | X_OK) == 0)
+			node->command[0] = ft_strjoin("/", node->c_name);
+			pipex->tmp1 = node->command[0];
+			while (pipex->path[++pipex->i])
 			{
-				node->flag = 1;
-				break;
+				node->command[0] = ft_strjoin(pipex->path[pipex->i], pipex->tmp1);
+				if (access(node->command[0], F_OK | X_OK) == 0)
+				{
+					node->flag = 1;
+					break;
+				}
+				if (!node->flag && pipex->path[pipex->i + 1])
+					free(node->command[0]);
 			}
-			if (!node->flag && pipex->path[pipex->i + 1])
-				free(node->command[0]);
+			free(pipex->tmp1);	
 		}
+		else if (access(node->c_name, F_OK | X_OK) == 0)
+		{
+			node->flag = 1;
+		}
+		node->index = pipex->j - 2;
 		ft_lstadd_back(&pipex->command, node);
-		free(pipex->tmp1);
 	}
 }

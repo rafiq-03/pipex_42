@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/12 18:16:02 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/12 19:53:07 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_list
 	int in_fd; // input fd
 	int out_fd; // output fd
 	int	flag; // command found or not (1=found)  (0=not found)
+	int	index;
 	struct s_list	*next; // next node of list
 }	t_list;
 
@@ -64,7 +65,7 @@ void	first_command(t_pipex *pipex, char *av_2);
 void	other_commands(t_pipex *pipex, char **av, int ac);
 void	fill_fd(t_pipex *pipex);
 
-void	child_1(char **envp, t_list *cmd);
+void	child(char **envp, t_list *cmd);
 
 
 void	clear_all(t_pipex *pipex);

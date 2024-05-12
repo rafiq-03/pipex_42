@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 18:59:11 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/12 16:36:18 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:47:58 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void	del(char **command, char *name) // free command;
 		free(command[i++]);
 	free(command);
 	command = NULL;
-	free(name);
-	name = NULL;// free command name
+	if (name)
+	{
+		free(name);
+		name = NULL;// free command name	
+	}
 }
