@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 23:16:38 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/05/11 22:47:59 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/12 16:45:33 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ NAME= pipex
 CC=gcc
 CFLAGS= -Wall -Wextra -Werror
 
+#-fsanitize=address
 ### LIBFT
 
 LIBFT = libft.a
@@ -30,6 +31,7 @@ UTILS_DIR = Mandatory/
 UTILS_S = $(addprefix $(UTILS_DIR), utils.c \
 									init_command.c\
 									ft_close.c \
+									ft_child_1.c \
 									)
 
 UTILS_O = $(UTILS_S:.c=.o)
@@ -75,12 +77,13 @@ clean:
 	@make -C $(LIBFT_DIR) fclean
 	@rm -f $(UTILS_O)
 	@rm -f $(B_UTILS_O)
+	@rm -f $(LUTILS_O)
 	@echo "DONE .."
 	
 
 fclean: clean
-	@rm $(NAME)
-	@rm $(BNAME)
+	@rm -f $(NAME)
+	@rm -f $(BNAME)
 re: fclean all
 
 .PHONY: clean fclean re all

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:20:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/11 22:51:14 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:34:08 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,62 +22,54 @@ void	first_command(t_pipex *pipex, char *av_2)
 {
 	t_list *first;
 	char *tmp;
-	int		i;
 
-	i = 0;
+	pipex->i = -1;
 	first = ft_lstnew();
+	if (ft_strlen(av_2) == 0)
+		return;
 	first->command = ft_split(av_2, ' '); // I want to make a split function for this shit 		
+	first->c_name = first->command[0];
+	first->command[0] = ft_strjoin("/", first->c_name);
 	tmp = first->command[0];
-	first->command[0] = ft_strjoin("/", tmp);
-	free(tmp);
-	tmp = first->command[0];
-	printf("%s\n", tmp + 1);
-	while (pipex->path[i])
+	while (pipex->path[++pipex->i])
 	{
-		first->command[0] = ft_strjoin(pipex->path[i], tmp);
+		first->command[0] = ft_strjoin(pipex->path[pipex->i], tmp);
 		if (access(first->command[0], F_OK | X_OK) == 0)
 		{
-			first->flag = 1; // command found
-			pipex->command = first;
-			free(tmp);
-			return;
+			first->flag = 1;
+			break;
 		}
-		free(first->command[0]);
-		// ft_free(first->command);
-		i++;
+		if (!first->flag && pipex->path[pipex->i + 1])
+			free(first->command[0]);
 	}
+	pipex->command = first;
+	free(tmp);
 }
 void	other_commands(t_pipex *pipex, char **av, int ac)
 {
 	t_list	*node;
-	char	*tmp;
-	int		a;
-	int		i;
 
-	a = 2; // iteration in arguments
-	while (++a < ac - 1)
+	pipex->j = 2; // iteration in arguments
+	while (++pipex->j < ac - 1)
 	{
-		i = 0; // iteration in path
+		pipex->i = -1; // iteration in path
 		node = ft_lstnew();
-		node->command = ft_split(av[a], ' '); // I want to make a split function for this shit 		
-		tmp = node->command[0];
-		node->command[0] = ft_strjoin("/", tmp);
-		free(tmp);
-		tmp = node->command[0];
-		printf("%s\n", tmp + 1);
-		while (pipex->path[i])
+		node->command = ft_split(av[pipex->j], ' '); // I want to make a split function for this shit 		
+		node->c_name = node->command[0];
+		node->command[0] = ft_strjoin("/", node->c_name);
+		pipex->tmp1 = node->command[0];
+		while (pipex->path[++pipex->i])
 		{
-			node->command[0] = ft_strjoin(pipex->path[i], tmp);
+			node->command[0] = ft_strjoin(pipex->path[pipex->i], pipex->tmp1);
 			if (access(node->command[0], F_OK | X_OK) == 0)
 			{
-				node->flag = 1;// command found
-				ft_lstadd_back(&pipex->command, node);
-				free(tmp);
-				return;
+				node->flag = 1;
+				break;
 			}
-			free(node->command[0]);
-			i++;
+			if (!node->flag && pipex->path[pipex->i + 1])
+				free(node->command[0]);
 		}
-		// ft_free(node->command);
+		ft_lstadd_back(&pipex->command, node);
+		free(pipex->tmp1);
 	}
 }

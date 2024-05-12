@@ -1,20 +1,27 @@
-/* ************************************************************************** */
+// /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_child_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 18:59:11 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/12 16:39:53 by rmarzouk         ###   ########.fr       */
+/*   Created: 2024/05/09 15:37:46 by rmarzouk          #+#    #+#             */
+/*   Updated: 2024/05/09 18:12:32 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "libft.h"
+#include "pipex.h"
 
-// void	ft_lstdelone(t_list *lst, void (*del) (void *))
-// {
-// 	if (lst && del)
-// 		del(lst->content); 
-// 	free(lst);
-// }
+void	child_2(char **envp, t_list *cmd)
+{
+	if (cmd->flag == 0)
+	{
+		ft_putstr_fd(cmd->c_name, 2);
+		ft_putendl_fd("Command not found", 2);
+		exit(EXIT_FAILURE);
+	}
+	execve(cmd->command[0], cmd->command, envp);
+}
+
+
+

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/11 22:47:09 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/12 16:50:37 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,61 @@ void	ll()
 int main(int ac, char **av, char **envp)
 {
 	t_pipex	pipex;
+	int p_id;
 	
-	atexit(ll);
+	// atexit(ll);
 	check_command_line(ac, av, envp);// check the number of argumments
+	init_struct(&pipex,ac, av);// init_struct with initial values
 	search_paths(&pipex, envp); // fill the paths of commands
+	printf("here\n");
 	init_commands(ac,av, &pipex);// fill list of commands depends on how may args in pipex program
-	
-	t_list *tmp;
-	tmp = pipex.command;
-
-	print(pipex.path);
-	while (tmp)
+	fill_fd(&pipex); // fill the list with fd of pipes
+	// print_list(&pipex); // print list
+	p_id = fork();
+	if (p_id == 0)
 	{
-		printf("-----------------\n");
-		print(tmp->command);
-		printf("------------|-----\n");
-		printf("flag : %d\n", tmp->flag);
-		printf("in   : %d\n", tmp->in_fd);
-		printf("out  : %d\n", tmp->out_fd);
-		printf("-----------------\n");
-		tmp = tmp->next;
+		printf("child\n");
+		child_1(envp, pipex.command);
 	}
-
-
-
-
-
-
-
-
-
+	else
+	{
+		wait(NULL);
+		printf("this is parent\n");
+		p_id = fork();
+		if (p_id == 0)
+		{
+			printf("child 2\n");
+			child_1(envp, pipex.command->next);
+		}
+			
+	}
+	
 
 	clear_all(&pipex);
+
 	
 }
 
+
+void	print_list(t_pipex *pipe)
+{
+	t_list *tmp;
+	tmp = pipe->command;
+	while (tmp != NULL)
+	{
+		printf("----------------------------\n");
+		printf("COMMAND:%s              |\n", tmp->c_name);
+		printf("--------------------\n");
+		print(tmp->command);
+		printf("--------------------\n");
+		printf("flag : %d                   |\n", tmp->flag);
+		printf("in   : %d                   |\n", tmp->in_fd);
+		printf("out  : %d                   |\n", tmp->out_fd);
+		printf("---------------------------\n");
+		printf("         | |      \n");
+		tmp = tmp->next;
+	}
+}
 void	print(char **str)
 {
 	int i = 0;
@@ -64,5 +84,5 @@ void	print(char **str)
 		i++;
 	}
 	if (str[i] == NULL)
-		printf("[%d] : NULL\n", i);
+		printf("[%d] : NULL                 |\n", i);
 }
