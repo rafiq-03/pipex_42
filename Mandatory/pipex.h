@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/12 16:45:05 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:16:02 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_pipex
 {
 	t_list	*command;// store the command in a node 
 	char 	**path; // when I want to store path var
+	int		path_falg; // check in path is valid or not
 	int		**pfd; // store pipes of commands
 	int		infile_fd; // file discriptor of inputfile
 	int		outfile_fd; // file discriptor of outputfile
@@ -44,7 +45,7 @@ typedef struct s_pipex
 	char	*tmp2;//same
 	int		i;// this variables for iteration
 	int		j;//same
-	int		pnb;
+	int		pnb; // number of pipes
 }	t_pipex;
 
 

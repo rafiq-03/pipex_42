@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/12 16:50:37 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:01:21 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int ac, char **av, char **envp)
 	printf("here\n");
 	init_commands(ac,av, &pipex);// fill list of commands depends on how may args in pipex program
 	fill_fd(&pipex); // fill the list with fd of pipes
-	// print_list(&pipex); // print list
+	print_list(&pipex); // print list
 	p_id = fork();
 	if (p_id == 0)
 	{
