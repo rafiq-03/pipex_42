@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/13 17:46:20 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:15:16 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	cmd_n_found(char *cmd);
 
 void	clear_all(t_pipex *pipex);
 void	clear_pipes(t_pipex *pipex);
+void	close_all_pipes(int **pfd, int pnb);
 void	ft_free(char **s);
 /*linked lists____________________________*/
 

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/14 13:22:29 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:13:58 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char **av, char **envp)
 {
 	t_pipex	pipex;
 	t_list	*cmd;
+	// t_list	*prev;   
 	int		p_id;
 
 	// atexit(ll);
@@ -35,27 +36,24 @@ int	main(int ac, char **av, char **envp)
 	// printf("__________________________\n");
 	cmd = pipex.command;
 	// int a = 2;
+	// close(STDIN_FILENO);
+	// close(STDOUT_FILENO);
 	while (cmd)
 	{
 		p_id = fork();
-		if (p_id == 0)
+		if (p_id == 0) // child
 		{
-			// printf("child\n");
 			child(envp, &pipex, cmd);
 		}
-		else
+		else // parent
 		{
-			printf("in  : %d\n", cmd->in_fd);
-			printf("out : %d\n", cmd->out_fd);
 			close(cmd->out_fd);
 			close(cmd->in_fd);
 		}
 		cmd = cmd->next;
 	}
 	while (wait(NULL) > 0)
-	{
-		
-	}
+		;
 	clear_all(&pipex);
 }
 

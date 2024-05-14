@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:38:31 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/13 19:07:12 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:15:00 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	init_struct(t_pipex *pipex, int ac, char **av)
 		ft_putendl_fd(": No such file or directory", 2);
 		exit(EXIT_FAILURE);
 	}
-	printf("in_file:%d|out_file:%d\n", pipex->infile_fd, pipex->outfile_fd);
+	// printf("in_file:%d|out_file:%d\n", pipex->infile_fd, pipex->outfile_fd);
 	pipex->i = 0;
 	pipex->j = 0;
 }
@@ -111,5 +111,18 @@ void	cmd_n_found(char *cmd)
 {
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(cmd, 2);
-	ft_putendl_fd(": Command not found", 2);
+	ft_putendl_fd(": command not found", 2);
+}
+
+
+void	close_all_pipes(int **pfd, int pnb)
+{
+	int i = 0;
+
+	while (i < pnb)
+	{
+		close(pfd[i][0]);
+		close(pfd[i] [1]);
+		i++;
+	}
 }
