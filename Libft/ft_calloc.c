@@ -20,7 +20,7 @@ void	*ft_calloc(size_t count, size_t size)
 		return (malloc(0));
 	if (count > (9223372036854775807 / size))
 		return (NULL);
-	ptr = (unsigned char *)malloc (count * size);
+	ptr = (unsigned char *)malloc(count * size);
 	if (!ptr)
 		return (0);
 	ft_bzero(ptr, count * size);

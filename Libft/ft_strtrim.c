@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static	int	found_set(const char *s, char c)
+static int	found_set(const char *s, char c)
 {
 	while (*s)
 	{
@@ -33,10 +33,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	first = 0;
 	last = ft_strlen(s1) - 1;
-	while (*(s1 + first) && found_set(set,*(s1 + first)))
+	while (*(s1 + first) && found_set(set, *(s1 + first)))
 		first++;
-	while (*(s1 + last) && found_set(set,*(s1 + last)))
+	while (*(s1 + last) && found_set(set, *(s1 + last)))
 		last--;
-	trim = ft_substr(s1, first, last - first + 1); 
+	trim = ft_substr(s1, first, last - first + 1);
 	return (trim);
 }

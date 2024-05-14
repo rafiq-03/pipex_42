@@ -20,10 +20,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	tlen = ft_strlen(s1) + ft_strlen(s2);
-	str = malloc ((tlen + 1) * sizeof(char));
+	str = malloc((tlen + 1) * sizeof(char));
 	if (!str)
 		return (0);
 	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
-	ft_strlcat(str + ft_strlen (s1), s2, tlen + 1);
+	ft_strlcat(str + ft_strlen(s1), s2, tlen + 1);
 	return (str);
 }

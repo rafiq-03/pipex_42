@@ -6,13 +6,13 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:38:31 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/12 19:19:33 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:07:12 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void    check_command_line(int ac, char **av, char **envp)
+void	check_command_line(int ac, char **av, char **envp)
 {
 	(void)av;
 	(void)envp;
@@ -25,20 +25,20 @@ void    check_command_line(int ac, char **av, char **envp)
 
 void	search_paths(t_pipex *pipex, char **envp)
 {
-	int i;
-	char *path;
+	int		i;
+	char	*path;
 
 	path = NULL;
 	i = 0;
 	while (envp[i])
 	{
-			if (ft_strnstr(envp[i], "PATH=", 5))
-			{
-				path = envp[i] + 5;
-				pipex->path_falg = 1;
-				break;
-			}
-			i++;
+		if (ft_strnstr(envp[i], "PATH=", 5))
+		{
+			path = envp[i] + 5;
+			pipex->path_falg = 1;
+			break ;
+		}
+		i++;
 	}
 	// if (!path || ft_strlen(path) == 0)
 	// 	pipex->path_falg = 0;
@@ -63,45 +63,53 @@ void	init_struct(t_pipex *pipex, int ac, char **av)
 		ft_putstr_fd(av[1], 2);
 		ft_putendl_fd(": No such file or  directory", 2);
 	}
-	if (-1 == (pipex->outfile_fd = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0666)))
+	pipex->pfd = malloc((ac - 4) * sizeof(int *));
+	while (pipex->i < ac - 4)
+	{
+		pipex->pfd[pipex->i] = malloc(2 * sizeof(int));
+		pipex->j = pipe(pipex->pfd[pipex->i]); // init pipes here after
+		if (pipex->j == -1)
+			printf("fail to create a pipe\n");
+		printf("pipe[%d][> %d == %d <]\n", pipex->i, pipex->pfd[pipex->i][0],
+				pipex->pfd[pipex->i][1]);
+		pipex->i++;
+	}
+	if (-1 == (pipex->outfile_fd = open(av[ac - 1],
+				O_WRONLY | O_CREAT | O_TRUNC, 0666)))
 	{
 		ft_putstr_fd("bash : ", 2);
 		ft_putstr_fd(av[ac - 1], 2);
 		ft_putendl_fd(": No such file or directory", 2);
-		exit (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
-	printf("in_file : %d\t out_file : %d\n", pipex->infile_fd , pipex->outfile_fd);
-	pipex->pfd = malloc((ac - 4) * sizeof(int*));
-	while (pipex->i < ac - 4)
-	{
-		pipex->pfd[pipex->i] = malloc( 2 * sizeof(int));
-		pipex->j = pipe(pipex->pfd[pipex->i]);// init pipes here after
-		if (pipex->j == -1)
-			printf("fail to create a pipe\n");
-		printf("in : %d\tout : %d\n", pipex->pfd[pipex->i][0], pipex->pfd[pipex->i][1]);
-		pipex->i++;
-	}
+	printf("in_file:%d|out_file:%d\n", pipex->infile_fd, pipex->outfile_fd);
 	pipex->i = 0;
-	pipex->j = 0; 
+	pipex->j = 0;
 }
 
 void	fill_fd(t_pipex *pipex)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	pipex->i = 0;
 	tmp = pipex->command;
-	
 	tmp->in_fd = pipex->infile_fd;
-	tmp->out_fd = pipex->pfd[pipex->i][0];
+	tmp->out_fd = pipex->pfd[pipex->i][1];
 	tmp = tmp->next;
 	while (tmp->next)
 	{
-		tmp->in_fd = pipex->pfd[pipex->i][1];
-		tmp->out_fd = pipex->pfd[pipex->i + 1][0];
+		tmp->in_fd = pipex->pfd[pipex->i][0];
+		tmp->out_fd = pipex->pfd[pipex->i + 1][1];
 		tmp = tmp->next;
 		pipex->i++;
 	}
-	tmp->in_fd = pipex->pfd[pipex->i][1];
+	tmp->in_fd = pipex->pfd[pipex->i][0];
 	tmp->out_fd = pipex->outfile_fd;
+}
+
+void	cmd_n_found(char *cmd)
+{
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": Command not found", 2);
 }

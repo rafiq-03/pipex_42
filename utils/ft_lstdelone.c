@@ -12,7 +12,7 @@
 
 #include "../Mandatory/pipex.h"
 
-void	ft_lstdelone(t_list *lst, void (*del) (char **, char *))
+void	ft_lstdelone(t_list *lst, void (*del)(char **, char *))
 {
 	if (lst && del)
 		del(lst->command, lst->c_name);
@@ -25,7 +25,7 @@ void	del(char **command, char *name) // free command;
 
 	i = 0;
 	if (!command)
-		return;
+		return ;
 	while (command[i])
 		free(command[i++]);
 	free(command);
@@ -33,6 +33,6 @@ void	del(char **command, char *name) // free command;
 	if (name)
 	{
 		free(name);
-		name = NULL;// free command name	
+		name = NULL; // free command name
 	}
 }

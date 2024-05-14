@@ -24,11 +24,11 @@
 // 	return (node);
 // }
 
-t_list *ft_lstnew(void)
+t_list	*ft_lstnew(void)
 {
-	t_list *node;
+	t_list	*node;
 
-	node = malloc (sizeof(t_list));
+	node = malloc(sizeof(t_list));
 	if (!node)
 		return (NULL);
 	node->flag = 0;

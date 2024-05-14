@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 11:21:31 by rmarzouk          #+#    #+#              #
-#    Updated: 2023/12/30 14:52:24 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/12 20:37:15 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,22 +45,16 @@ ft_toupper.c \
 
 OBJ = ${SRC:.c=.o}
 NAME = libft.a
-SBONUS = ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c ft_lstdelone_bonus.c \
-ft_lstiter_bonus.c ft_lstlast_bonus.c ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c
-OBONUS = ${SBONUS:.c=.o}
 all: ${NAME}
 
 ${NAME}: ${OBJ}
 	ar -rcs ${NAME} ${OBJ}
-
-bonus: ${OBONUS}
-	ar -rcs ${NAME} ${OBONUS}
 	
 %.o:%.c libft.h
 	${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	rm -rf ${OBJ} ${OBONUS}
+	rm -rf ${OBJ}
 
 fclean: clean
 	rm -rf ${NAME}
