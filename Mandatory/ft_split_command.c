@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:16:00 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 17:49:41 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:23:03 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	free_res(char **array, size_t i)
 	free(array);
 }
 
-static size_t	word_len(const char *s, char c)
+size_t	word_len(const char *s, char c)
 {
 	size_t	i;
 
@@ -75,28 +75,21 @@ static size_t	word_len(const char *s, char c)
 
 static char	**ft_result1(char **res, const char *s, char c, size_t words)
 {
-	size_t	i;
+	int		i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
 	while (j < words)
 	{
-		while (s[i] && s[i] == c) // skip spaces
+		while (s[i] && s[i] == c)
 			i++;
-		if (s[i] && is_quote(s[i])) // handel quote
-		{
-			res[j] = ft_substr(s, i + 1, word_len(s + i, c) - 1);
-			i++;// skip first quote
-			while (s[i] && !is_quote(s[i])) //skip between quotes
-				i++;
-			if (s[i])
-				i++; // skip second quote
-		}
+		if (s[i] && is_quote(s[i]))
+			res[j] = between_q(s, &i, c);
 		else
 		{
 			res[j] = ft_substr(s, i, word_len((s + i), c));
-			while (s[i] && s[i] != c) // skip words
+			while (s[i] && s[i] != c)
 				i++;
 		}
 		if (!res[j])
@@ -118,7 +111,6 @@ char	**ft_split_command(const char *s, char c)
 	if (!s)
 		return (NULL);
 	words = _count_words(s, c);
-	printf("word : %d\n", words);
 	if (words == -1)
 	{
 		res = malloc(2 * sizeof(char *));

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:36:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 17:20:57 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:23:29 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,17 @@ int	quote_number(const char *s)
 		i++;
 	}
 	return (q);
+}
+
+char	*between_q(const char *s, int *i, char c)
+{
+	char	*str;
+
+	str = ft_substr(s, (*i) + 1, word_len(s + (*i), c) - 1);
+	(*i)++;
+	while (s[*i] && !is_quote(s[*i]))
+		(*i)++;
+	if (s[*i])
+		(*i)++;
+	return (str);
 }

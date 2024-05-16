@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/09 11:21:31 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/05/12 20:37:15 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/16 19:21:34 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,16 +48,16 @@ NAME = libft.a
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	ar -rcs ${NAME} ${OBJ}
+	@ar -rcs ${NAME} ${OBJ}
 	
 %.o:%.c libft.h
-	${CC} ${CFLAGS} -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 clean:
-	rm -rf ${OBJ}
+	@rm -rf ${OBJ}
 
 fclean: clean
-	rm -rf ${NAME}
+	@rm -rf ${NAME}
 
 re: fclean all
 

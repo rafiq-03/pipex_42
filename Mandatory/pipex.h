@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 17:21:16 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:21:49 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,27 @@ typedef struct s_pipex
 
 void		check_command_line(int ac, char **av, char **envp);
 void		init_struct(t_pipex *pipex, int ac, char **av);
+void		open_in_outfile(t_pipex *pipex, char *in, char *out);
+
 void		search_paths(t_pipex *pipex, char **envp);
-// void		init_commands(int ac, char **av, t_pipex *pipex);
-// void		first_command(t_pipex *pipex, char *av_2);
-void		init_commands(t_pipex *pipex, char **av, int ac);
+void		first_command(t_pipex *pipex, char *av_2);
+void		init_commands(int ac, char **av, t_pipex *pipex);
+void		first_command(t_pipex *pipex, char *av_2);
+void		other_commands(t_pipex *pipex, char **av, int ac);
+
+void		join_with_path(t_pipex *pipex, t_list *node);
 void		fill_fd(t_pipex *pipex);
 
 char		**ft_split_command(const char *s, char c);
+size_t		word_len(const char *s, char c);
 int			is_quote(char c);
+char		*between_q(const char *s, int *i, char c);
 void		count_in_quote(const char *s, int *count, int *i);
 int			quote_number(const char *s);
 void		child(char **envp, t_pipex *pipex, t_list *cmd);
 void		cmd_n_found(char *cmd);
 
+void		_close_in_out(int in, int out);
 void		clear_all(t_pipex *pipex);
 void		clear_pipes(t_pipex *pipex);
 void		close_all_pipes(int **pfd, int pnb);

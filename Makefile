@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 23:16:38 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/05/16 12:42:31 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/16 19:56:09 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME= pipex
 ### FLAGS
 
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror
+CFLAGS= -Wall -Wextra -Werror -g 
 
 #-fsanitize=address
 ### LIBFT
@@ -29,6 +29,7 @@ LIBFT_DIR = libft
 
 UTILS_DIR = Mandatory/
 UTILS_S = $(addprefix $(UTILS_DIR), utils.c \
+									init_struct.c\
 									init_command.c\
 									ft_close.c \
 									ft_child.c \

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 17:48:38 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:07:14 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,11 @@ int	main(int ac, char **av, char **envp)
 	t_pipex	pipex;
 	t_list	*cmd;
 
-	// atexit(ll);
-	check_command_line(ac, av, envp); // check the number of argumments
-	init_struct(&pipex, ac, av);      // init_struct with initial values
-	search_paths(&pipex, envp);       // fill the paths of commands
-	init_commands(&pipex, av, ac);
-	fill_fd(&pipex); // fill the list with fd of pipes
+	check_command_line(ac, av, envp);
+	init_struct(&pipex, ac, av);
+	search_paths(&pipex, envp);
+	init_commands(ac, av, &pipex);
+	fill_fd(&pipex);
 	print_list(&pipex);
 	cmd = pipex.command;
 	while (cmd)
@@ -38,15 +37,18 @@ int	main(int ac, char **av, char **envp)
 		if (pipex.pid == 0)
 			child(envp, &pipex, cmd);
 		else
-		{
-			close(cmd->out_fd);
-			close(cmd->in_fd);
-		}
+			_close_in_out(cmd->out_fd, cmd->in_fd);
 		cmd = cmd->next;
 	}
 	while (wait(NULL) > 0)
 		;
 	clear_all(&pipex);
+}
+
+void	_close_in_out(int in, int out)
+{
+	close (in);
+	close (out);
 }
 
 void	print_list(t_pipex *pipe)
