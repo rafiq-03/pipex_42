@@ -1,25 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   handel_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/07 18:38:24 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 14:39:44 by rmarzouk         ###   ########.fr       */
+/*   Created: 2024/05/16 12:36:20 by rmarzouk          #+#    #+#             */
+/*   Updated: 2024/05/16 17:20:57 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "pipex.h"
 
-size_t	ft_strlen(const char *s)
+int	is_quote(char c)
 {
-	size_t	i;
+	if (c && c == 39)
+		return (1);
+	else if (c && c == 34)
+		return (2);
+	return (0);
+}
+
+void	count_in_quote(const char *s, int *count, int *i)
+{
+	(*i)++;
+	while (s[*i] && !is_quote(s[*i]))
+		(*i)++;
+	if (is_quote(s[*i]))
+		(*i)++;
+	(*count)++;
+}
+
+int	quote_number(const char *s)
+{
+	int	i;
+	int	q;
 
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
+	q = 0;
+	while (s[i])
+	{
+		if (s[i] == 39 || s[i] == 34)
+			q++;
 		i++;
-	return (i);
+	}
+	return (q);
 }

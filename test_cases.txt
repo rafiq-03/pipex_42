@@ -1,0 +1,106 @@
+./pipex bigfile "cat" "cat" outfile
+
+
+./pipex infile "./pipex" "cat" outfile
+
+
+
+
+
+1. **Basic Functionality Tests**:
+   - `./pipex input "cat" "cat" output`
+   - `./pipex input "ls -l" "wc -l" output`
+   - `./pipex input "grep keyword" "wc -w" output`
+
+2. **Error Handling Tests**:
+   - Invalid number of arguments.
+   - Non-existent input file.
+   - Non-existent output file.
+   - Invalid shell commands.
+
+3. **Edge Cases**:
+   - Empty input file.
+   - Empty output file.
+   - Input file with only one line.
+   - Output file already exists (should overwrite).
+   - Extremely large input file.
+   - Extremely large output file.
+
+4. **Combination Tests**:
+   - `./pipex input "grep keyword" "sort" output`
+   - `./pipex input "sort" "uniq" output`
+   - `./pipex input "grep keyword" "sort -r" output`
+
+5. **Piping Specific Commands**:
+   - `./pipex input "grep keyword" "grep anotherkeyword" output`
+   - `./pipex input "sort -r" "uniq -c" output`
+   - `./pipex input "sort | uniq" "wc -l" output`
+
+6. **Handling Different File Types**:
+   - Binary input file.
+   - Text input file with special characters.
+   - Input file with multiple file extensions.
+   - Output file with different permissions.
+
+7. **Permissions Tests**:
+   - Input file with read-only permission.
+   - Output file with write-only permission.
+   - Input file with no permission.
+   - Output file in a directory with no write permission.
+
+8. **Boundary Tests**:
+   - Maximum length of input file name.
+   - Maximum length of output file name.
+   - Maximum length of shell command parameters.
+
+9. **Shell Command Variations**:
+   - `./pipex input "ls -l | grep keyword" "wc -l" output`
+   - `./pipex input "cat -n" "grep keyword" output`
+   - `./pipex input "sort -n" "uniq -c | sort -r" output`
+
+
+
+
+
+
+
+1. **Using AWK**:
+   - `./pipex input "awk '{print \$1}'" "sort" output`
+   - `./pipex input "awk '/keyword/{print \$2}'" "uniq -c" output`
+   - `./pipex input "awk '{print \$NF}'" "sort | uniq -c" output`
+
+2. **Using Sed**:
+   - `./pipex input "sed 's/old/new/g'" "sort" output`
+   - `./pipex input "sed -n '1,5p'" "wc -l" output`
+   - `./pipex input "sed '/pattern/d'" "sort | uniq" output`
+
+3. **Using Grep**:
+   - `./pipex input "grep 'pattern'" "sort" output`
+   - `./pipex input "grep -v 'pattern'" "wc -l" output`
+   - `./pipex input "grep -E 'pattern1|pattern2'" "sort | uniq" output`
+
+4. **Using Cut**:
+   - `./pipex input "cut -d ' ' -f 1" "sort" output`
+   - `./pipex input "cut -c 1-5" "wc -l" output`
+   - `./pipex input "cut -f 2" "sort | uniq" output`
+
+5. **Using Tr**:
+   - `./pipex input "tr '[:lower:]' '[:upper:]'" "sort" output`
+   - `./pipex input "tr -d '[:digit:]'" "wc -c" output`
+   - `./pipex input "tr -s '[:space:]' '\n'" "sort | uniq" output`
+
+6. **Using Sort**:
+   - `./pipex input "sort -r" "uniq -c" output`
+   - `./pipex input "sort -k2,2" "wc -l" output`
+   - `./pipex input "sort -u" "sort | uniq" output`
+
+7. **Using Xargs**:
+   - `./pipex input "xargs -n1" "sort" output`
+   - `./pipex input "xargs -I{} echo {}" "wc -l" output`
+   - `./pipex input "xargs -n1 echo | sort | uniq" "wc -l" output`
+
+8. **Using Awk with Complex Patterns**:
+   - `./pipex input "awk '/pattern1/ && !/pattern2/'" "sort" output`
+   - `./pipex input "awk '\$1 > 10 {print \$2}'" "uniq -c" output`
+   - `./pipex input "awk '/pattern/ {print \$NF}'" "sort | uniq" output`
+

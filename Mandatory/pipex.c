@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/14 20:13:58 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:48:38 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,31 +21,23 @@ int	main(int ac, char **av, char **envp)
 {
 	t_pipex	pipex;
 	t_list	*cmd;
-	// t_list	*prev;   
-	int		p_id;
 
 	// atexit(ll);
 	check_command_line(ac, av, envp); // check the number of argumments
 	init_struct(&pipex, ac, av);      // init_struct with initial values
 	search_paths(&pipex, envp);       // fill the paths of commands
-	init_commands(ac, av, &pipex);
-	// fill list of commands depends on how may args in pipex program
+	init_commands(&pipex, av, ac);
 	fill_fd(&pipex); // fill the list with fd of pipes
-	// printf("here\n");
-	// print_list(&pipex); // print list
-	// printf("__________________________\n");
+	print_list(&pipex);
 	cmd = pipex.command;
-	// int a = 2;
-	// close(STDIN_FILENO);
-	// close(STDOUT_FILENO);
 	while (cmd)
 	{
-		p_id = fork();
-		if (p_id == 0) // child
-		{
+		if (cmd->flag == 0)
+			pipex.exit_flag++;
+		pipex.pid = fork();
+		if (pipex.pid == 0)
 			child(envp, &pipex, cmd);
-		}
-		else // parent
+		else
 		{
 			close(cmd->out_fd);
 			close(cmd->in_fd);
@@ -78,6 +70,7 @@ void	print_list(t_pipex *pipe)
 		tmp = tmp->next;
 	}
 }
+
 void	print(char **str)
 {
 	int	i;

@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 23:16:38 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/05/14 15:32:58 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/16 12:42:31 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ UTILS_DIR = Mandatory/
 UTILS_S = $(addprefix $(UTILS_DIR), utils.c \
 									init_command.c\
 									ft_close.c \
-									ft_child_1.c \
+									ft_child.c \
+									ft_split_command.c\
+									handel_quote.c\
 									)
 
 UTILS_O = $(UTILS_S:.c=.o)
