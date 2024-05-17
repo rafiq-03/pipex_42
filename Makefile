@@ -23,7 +23,7 @@ CFLAGS= -Wall -Wextra -Werror
 ### LIBFT
 
 LIBFT = libft.a
-LIBFT_DIR = libft
+LIBFT_DIR = Libft
 
 ### UTILS
 
@@ -59,8 +59,8 @@ LUTILS_O = $(LUTILS_S:.c=.o)
 
 all: $(NAME)
 
-$(NAME):mandatory/$(NAME).c $(LIBFT) $(UTILS_O) $(LUTILS_O)
-	@$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(UTILS_O) $(LUTILS_O) mandatory/$(NAME).c -o $(NAME)
+$(NAME):Mandatory/$(NAME).c $(LIBFT) $(UTILS_O) $(LUTILS_O)
+	@$(CC) $(CFLAGS) $(UTILS_O) $(LUTILS_O) Mandatory/$(NAME).c -L$(LIBFT_DIR) -lft -o $(NAME)
 
 
 # bonus:$(BNAME)
