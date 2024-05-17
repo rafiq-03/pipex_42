@@ -6,17 +6,15 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:38:31 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 21:59:55 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:37:15 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	check_command_line(int ac, char **av, char **envp)
+void	check_command_line(int ac)
 {
-	(void)av;
-	(void)envp;
-	if (ac < 5)
+	if (ac != 5)
 	{
 		ft_putendl_fd("Invalid arguments", 1);
 		exit(EXIT_FAILURE);

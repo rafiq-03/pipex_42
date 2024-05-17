@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:35:09 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:38:49 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,17 @@ typedef struct s_pipex
 	int			infile_fd;
 	int			outfile_fd;
 	char		*tmp1;
+	char		*tmp2;
 	int			i;
+	int			j;
+	int			pnb;
 	int			pid;
 	int			exit_flag;
 }			t_pipex;
 
 /*__prototypes________________*/
 
-void		check_command_line(int ac, char **av, char **envp);
+void		check_command_line(int ac);
 void		init_struct(t_pipex *pipex, int ac, char **av);
 void		open_in_outfile(t_pipex *pipex, char *in, char *out);
 
