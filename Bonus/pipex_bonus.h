@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:15:46 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:55:31 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 /*__inlcudes__________________*/
 
@@ -26,33 +26,31 @@
 
 typedef struct s_list
 {
-	char			**command;// command extracted frome av[i]
+	char			**command;
 	char			*c_name;
-	int				in_fd;// input fd
-	int				out_fd;// output fd
-	int				flag;// command found or not (1=found)  (0=not found)
+	int				in_fd;
+	int				out_fd;
+	int				flag;
 	int				index;
-	struct s_list	*next;// next node of list
+	struct s_list	*next;
 }			t_list;
 
 typedef struct s_pipex
 {
-	t_list		*command;// store the command in a node
-	char		**path;// when I want to store path var
-	int			path_falg;// check in path is valid or not
-	int			**pfd;// store pipes of commands
-	int			infile_fd;// file discriptor of inputfile
-	int			outfile_fd;// file discriptor of outputfile
-	char		*tmp1;// for saving tmp values
-	char		*tmp2;//same
-	int			i;// this variables for iteration
-	int			j;//same
-	int			pnb;// number of pipes
+	t_list		*command;
+	char		**path;
+	int			path_falg;
+	int			**pfd;
+	int			infile_fd;
+	int			outfile_fd;
+	char		*tmp1;
+	char		*tmp2;
+	int			i;
+	int			j;
+	int			pnb;
 	int			pid;
 	int			exit_flag;
 }			t_pipex;
-
-/*__Macros____________________*/
 
 /*__prototypes________________*/
 
@@ -99,4 +97,5 @@ void		ft_lstadd_back(t_list **lst, t_list *new);
 
 void		print(char **str);
 void		print_list(t_pipex *pipe);
+
 #endif
