@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 20:07:14 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:12:07 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int ac, char **av, char **envp)
 	search_paths(&pipex, envp);
 	init_commands(ac, av, &pipex);
 	fill_fd(&pipex);
-	print_list(&pipex);
 	cmd = pipex.command;
 	while (cmd)
 	{

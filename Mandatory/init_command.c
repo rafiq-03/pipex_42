@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:20:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 20:06:36 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:59:54 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	first_command(t_pipex *pipex, char *av_2)
 		return ;
 	}
 	first->c_name = first->command[0];
-	if (!ft_strchr(first->c_name, '/') && pipex->path_falg)
+	if (!ft_strchr(first->c_name, '/')
+		&& !ft_strchr(first->c_name, '.') && pipex->path_falg)
 		join_with_path(pipex, first);
 	else if (access(first->c_name, F_OK | X_OK) == 0)
 		first->flag = 1;
@@ -56,7 +57,8 @@ void	other_commands(t_pipex *pipex, char **av, int ac)
 			return ;
 		}
 		node->c_name = node->command[0];
-		if (!ft_strchr(node->c_name, '/') && pipex->path)
+		if (!ft_strchr(node->c_name, '/')
+			&& !ft_strchr(node->c_name, '.') && pipex->path)
 			join_with_path(pipex, node);
 		else if (access(node->c_name, F_OK | X_OK) == 0)
 			node->flag = 1;

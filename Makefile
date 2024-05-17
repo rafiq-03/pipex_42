@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 23:16:38 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/05/16 19:56:09 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/17 18:57:33 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME= pipex
 ### FLAGS
 
 CC=gcc
-CFLAGS= -Wall -Wextra -Werror -g 
+CFLAGS= -Wall -Wextra -Werror
 
 #-fsanitize=address
 ### LIBFT

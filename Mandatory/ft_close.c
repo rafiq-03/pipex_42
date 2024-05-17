@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 22:45:49 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 20:08:53 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 19:01:10 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	clear_all(t_pipex *pipex)
 {
-	// ft_lstclear(&pipex->command, del);  // we clear this list
+	ft_lstclear(&pipex->command, del);
 	ft_free(pipex->path);
 	clear_pipes(pipex);
 	if (pipex->exit_flag == pipex->pnb + 1)
