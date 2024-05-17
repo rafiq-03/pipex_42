@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:35:09 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:15:46 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,33 @@
 
 typedef struct s_list
 {
-	char			**command;
+	char			**command;// command extracted frome av[i]
 	char			*c_name;
-	int				in_fd;
-	int				out_fd;
-	int				flag;
+	int				in_fd;// input fd
+	int				out_fd;// output fd
+	int				flag;// command found or not (1=found)  (0=not found)
 	int				index;
-	struct s_list	*next;
+	struct s_list	*next;// next node of list
 }			t_list;
 
 typedef struct s_pipex
 {
-	t_list		*command;
-	char		**path;
-	int			path_falg;
-	int			**pfd;
-	int			infile_fd;
-	int			outfile_fd;
-	char		*tmp1;
-	int			i;
+	t_list		*command;// store the command in a node
+	char		**path;// when I want to store path var
+	int			path_falg;// check in path is valid or not
+	int			**pfd;// store pipes of commands
+	int			infile_fd;// file discriptor of inputfile
+	int			outfile_fd;// file discriptor of outputfile
+	char		*tmp1;// for saving tmp values
+	char		*tmp2;//same
+	int			i;// this variables for iteration
+	int			j;//same
+	int			pnb;// number of pipes
 	int			pid;
 	int			exit_flag;
 }			t_pipex;
+
+/*__Macros____________________*/
 
 /*__prototypes________________*/
 
@@ -90,4 +95,8 @@ void		del(char **command, char *name); // delete function
 void		ft_lstclear(t_list **lst, void (*del)(char **, char *));
 void		ft_lstadd_back(t_list **lst, t_list *new);
 
+/*_______________________________________*/
+
+void		print(char **str);
+void		print_list(t_pipex *pipe);
 #endif
