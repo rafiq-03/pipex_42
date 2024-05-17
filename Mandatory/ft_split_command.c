@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:16:00 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 20:23:03 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:10:46 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ static char	**ft_result1(char **res, const char *s, char c, size_t words)
 	j = 0;
 	while (j < words)
 	{
-		while (s[i] && s[i] == c)
-			i++;
+		skip_sapces(s, &i, c);
 		if (s[i] && is_quote(s[i]))
 			res[j] = between_q(s, &i, c);
 		else

@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:36:20 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 20:23:29 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:11:26 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,10 @@ char	*between_q(const char *s, int *i, char c)
 	if (s[*i])
 		(*i)++;
 	return (str);
+}
+
+void	skip_sapces(const char *s, int *i, char c)
+{
+	while (s[*i] && s[*i] == c)
+		(*i)++;
 }

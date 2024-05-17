@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:38:31 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 17:32:09 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:59:55 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	search_paths(t_pipex *pipex, char **envp)
 	int		i;
 	char	*path;
 
+	if (!envp)
+		return ;
 	path = NULL;
 	i = 0;
 	while (envp[i])

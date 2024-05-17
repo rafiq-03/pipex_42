@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 13:11:36 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/11 22:17:51 by rmarzouk         ###   ########.fr       */
+/*   Created: 2023/12/24 21:29:56 by rmarzouk          #+#    #+#             */
+/*   Updated: 2024/05/17 20:17:16 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Mandatory/pipex.h"
+#include "../../Mandatory/pipex.h"
 
-int	ft_lstsize(t_list *lst)
+void	ft_lstclear(t_list **lst, void (*del)(char **, char *))
 {
-	int	i;
+	t_list	*current;
+	t_list	*tmp;
 
-	i = 0;
-	while (lst != NULL)
+	current = *lst;
+	if (lst && del)
 	{
-		lst = lst->next;
-		i++;
+		while (current)
+		{
+			tmp = current;
+			current = current->next;
+			ft_lstdelone(tmp, del);
+		}
+		*lst = NULL;
 	}
-	return (i);
 }

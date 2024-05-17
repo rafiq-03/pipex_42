@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 23:16:38 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/05/17 18:57:33 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/17 20:16:15 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CFLAGS= -Wall -Wextra -Werror
 ### LIBFT
 
 LIBFT = libft.a
-LIBFT_DIR = Libft
+LIBFT_DIR = Utils/Libft
 
 ### UTILS
 
@@ -39,7 +39,7 @@ UTILS_S = $(addprefix $(UTILS_DIR), utils.c \
 
 UTILS_O = $(UTILS_S:.c=.o)
 
-LUTILS_DIR = utils/
+LUTILS_DIR = Utils/lists/
 LUTILS_S = $(addprefix $(LUTILS_DIR),	ft_lstadd_back.c\
 										ft_lstclear.c    \
 										ft_lstdelone.c   \

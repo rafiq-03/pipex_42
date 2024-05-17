@@ -6,16 +6,11 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 19:12:07 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:01:17 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-void	ll(void)
-{
-	system("leaks pipex");
-}
 
 int	main(int ac, char **av, char **envp)
 {

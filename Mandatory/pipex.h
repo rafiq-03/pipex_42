@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 20:21:49 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:15:09 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*__inlcudes__________________*/
 
-# include "../Libft/libft.h"
+# include "../Utils/Libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -73,6 +73,7 @@ char		**ft_split_command(const char *s, char c);
 size_t		word_len(const char *s, char c);
 int			is_quote(char c);
 char		*between_q(const char *s, int *i, char c);
+void		skip_sapces(const char *s, int *i, char c);
 void		count_in_quote(const char *s, int *count, int *i);
 int			quote_number(const char *s);
 void		child(char **envp, t_pipex *pipex, t_list *cmd);
