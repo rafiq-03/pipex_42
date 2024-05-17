@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:20:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 21:57:53 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:30:15 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ void	first_command(t_pipex *pipex, char *av_2)
 		pipex->command = first;
 		return ;
 	}
-	first->c_name = first->command[0];
+	first->c_name = ft_strdup(first->command[0]);
 	if (ft_strchr(first->c_name, '/') || ft_strchr(first->c_name, '.'))
 	{
 		if (access(first->c_name, F_OK | X_OK) == 0)
 			first->flag = 1;
-		first->c_name = ft_strdup(first->c_name);
 	}
 	else if (pipex->path_falg)
 		join_with_path(pipex, first);
@@ -58,12 +57,11 @@ void	other_commands(t_pipex *pipex, char **av, int ac)
 			ft_lstadd_back(&pipex->command, node);
 			return ;
 		}
-		node->c_name = node->command[0];
+		node->c_name = ft_strdup(node->command[0]);
 		if (ft_strchr(node->c_name, '/') || ft_strchr(node->c_name, '.'))
 		{
 			if (access(node->c_name, F_OK | X_OK) == 0)
 				node->flag = 1;
-			node->c_name = ft_strdup(node->c_name);
 		}
 		else if (pipex->path)
 			join_with_path(pipex, node);
@@ -74,6 +72,8 @@ void	other_commands(t_pipex *pipex, char **av, int ac)
 
 void	join_with_path(t_pipex *pipex, t_list *node)
 {
+	pipex->i = -1;
+	free(node->command[0]);
 	node->command[0] = ft_strjoin("/", node->c_name);
 	pipex->tmp1 = node->command[0];
 	while (pipex->path[++pipex->i])

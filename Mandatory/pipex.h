@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 20:15:09 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:15:46 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*__inlcudes__________________*/
 
-# include "../Utils/Libft/libft.h"
+# include "../utils/Libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
