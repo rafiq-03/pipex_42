@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 22:45:49 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:55:57 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:07:09 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	clear_all(t_pipex *pipex)
 	ft_lstclear(&pipex->command, del);
 	ft_free(pipex->path);
 	clear_pipes(pipex);
+	if (pipex->here_doc_flag)
+		unlink("/tmp/here_doc");
 	if (pipex->exit_flag == pipex->pnb + 1)
 		exit(1);
 	exit(0);

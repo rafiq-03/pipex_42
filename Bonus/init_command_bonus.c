@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:20:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:56:42 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:21:59 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,16 @@
 
 void	init_commands(int ac, char **av, t_pipex *pipex)
 {
-	first_command(pipex, av[2]);
+	if (pipex->here_doc_flag)
+	{
+		first_command(pipex, av[3]);
+		pipex->j = 3;
+	}
+	else
+	{
+		first_command(pipex, av[2]);
+		pipex->j = 2;
+	}
 	other_commands(pipex, av, ac);
 }
 
@@ -46,7 +55,6 @@ void	other_commands(t_pipex *pipex, char **av, int ac)
 {
 	t_list	*node;
 
-	pipex->j = 2;
 	while (++pipex->j < ac - 1)
 	{
 		node = ft_lstnew();

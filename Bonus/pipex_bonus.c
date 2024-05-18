@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:56:48 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:12:28 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ int	main(int ac, char **av, char **envp)
 	t_pipex	pipex;
 	t_list	*cmd;
 
-	check_command_line(ac, av, envp);
+	check_command_line(ac, av, &pipex);
 	init_struct(&pipex, ac, av);
 	search_paths(&pipex, envp);
 	init_commands(ac, av, &pipex);
 	fill_fd(&pipex);
+	hande_here_doc(&pipex);
 	cmd = pipex.command;
 	while (cmd)
 	{
@@ -41,8 +42,8 @@ int	main(int ac, char **av, char **envp)
 
 void	_close_in_out(int in, int out)
 {
-	close (in);
-	close (out);
+	close(in);
+	close(out);
 }
 
 void	print_list(t_pipex *pipe)

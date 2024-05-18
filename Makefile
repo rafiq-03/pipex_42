@@ -6,12 +6,12 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 23:16:38 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/05/17 20:16:15 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/18 16:43:07 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= pipex
-# BNAME= pipex_bonus
+BNAME= pipex_bonus
 
 
 ### FLAGS
@@ -50,12 +50,28 @@ LUTILS_S = $(addprefix $(LUTILS_DIR),	ft_lstadd_back.c\
 
 LUTILS_O = $(LUTILS_S:.c=.o)
 
-# B_UTILS_DIR = Bonus/
-# B_UTILS_S = $(addprefix $(B_UTILS_DIR), pipex_bonus)
+GNLUTILS_DIR = Utils/gnl/
+GNLUTILS_S = $(addprefix $(GNLUTILS_DIR),	get_next_line.c\
+										get_next_line_utils.c\
+									)
 
-# B_UTILS_O = $(B_UTILS_S:.c=.o)
+GNLUTILS_O = $(GNLUTILS_S:.c=.o)
+
+B_UTILS_DIR = Bonus/
+B_UTILS_S = $(addprefix $(B_UTILS_DIR),	utils_bonus.c \
+										init_struct_bonus.c \
+										init_command_bonus.c \
+										ft_close_bonus.c \
+										ft_child_bonus.c \
+										ft_split_command_bonus.c \
+										handel_quote_bonus.c \
+										here_doc_bonus.c \
+										)
+
+B_UTILS_O = $(B_UTILS_S:.c=.o)
 
 #_________________________________________________________
+bonus:$(BNAME)
 
 all: $(NAME)
 
@@ -63,9 +79,10 @@ $(NAME):Mandatory/$(NAME).c $(LIBFT) $(UTILS_O) $(LUTILS_O)
 	@$(CC) $(CFLAGS) $(UTILS_O) $(LUTILS_O) Mandatory/$(NAME).c -L$(LIBFT_DIR) -lft -o $(NAME)
 
 
-# bonus:$(BNAME)
-# $(BNAME):Bonus/$(BNAME).c $(LIBFT) $(B_UTILS_O)
-# 	@$(CC) $(CFLAGS) $(LIBFT_DIR)/$(LIBFT) $(B_UTILS_O) Bonus/$(BNAME).c -o $(BNAME)	
+
+$(BNAME):Bonus/$(BNAME).c $(LIBFT) $(B_UTILS_O) $(LUTILS_O) $(GNLUTILS_O)
+	@$(CC) $(CFLAGS) $(B_UTILS_O) $(LUTILS_O) $(GNLUTILS_O) Bonus/$(BNAME).c -L$(LIBFT_DIR) -lft -o $(NAME)	
+	
 #_________________________________________________________
 
 $(LIBFT):
@@ -81,6 +98,7 @@ clean:
 	@rm -f $(UTILS_O)
 	@rm -f $(B_UTILS_O)
 	@rm -f $(LUTILS_O)
+	@rm -f $(GNLUTILS_O)
 	@echo "DONE .."
 	
 

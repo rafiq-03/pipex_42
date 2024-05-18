@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 19:51:42 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:56:45 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:16:59 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ void	init_struct(t_pipex *pipex, int ac, char **av)
 	pipex->j = 0;
 	pipex->exit_flag = 0;
 	pipex->path_falg = 0;
-	pipex->pnb = ac - 4;
+	if (pipex->here_doc_flag)
+		pipex->pnb = ac - 5;
+	else
+		pipex->pnb = ac - 4;
 	pipex->tmp1 = NULL;
 	pipex->tmp2 = NULL;
 	open_in_outfile(pipex, av[1], av[ac - 1]);
-	pipex->pfd = malloc((ac - 4) * sizeof(int *));
-	while (pipex->i < ac - 4)
+	pipex->pfd = malloc(pipex->pnb * sizeof(int *));
+	while (pipex->i < pipex->pnb)
 	{
 		pipex->pfd[pipex->i] = malloc(2 * sizeof(int));
 		pipex->j = pipe(pipex->pfd[pipex->i]);
@@ -37,7 +40,21 @@ void	init_struct(t_pipex *pipex, int ac, char **av)
 
 void	open_in_outfile(t_pipex *pipex, char *in, char *out)
 {
-	pipex->infile_fd = open(in, O_RDONLY);
+	if (pipex->here_doc_flag)
+	{
+		pipex->infile_fd = open("/tmp/here_doc", O_RDWR | O_CREAT, 0666);
+		pipex->outfile_fd = open(out, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	}
+	else
+	{
+		pipex->infile_fd = open(in, O_RDONLY);
+		pipex->outfile_fd = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	}
+	check_open(pipex, in, out);
+}
+
+void	check_open(t_pipex *pipex, char *in, char *out)
+{
 	if (pipex->infile_fd == -1)
 	{
 		ft_putstr_fd("bash : ", 2);
@@ -47,7 +64,6 @@ void	open_in_outfile(t_pipex *pipex, char *in, char *out)
 		else if (access(in, R_OK))
 			ft_putendl_fd(": permission denied", 2);
 	}
-	pipex->outfile_fd = open(out, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (pipex->outfile_fd == -1)
 	{
 		ft_putstr_fd("bash : ", 2);

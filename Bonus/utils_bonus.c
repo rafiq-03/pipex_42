@@ -6,21 +6,26 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:38:31 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:56:34 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:44:35 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-void	check_command_line(int ac, char **av, char **envp)
+void	check_command_line(int ac, char **av, t_pipex *pipex)
 {
-	(void)av;
-	(void)envp;
-	if (ac < 5)
+	if ((!ft_strncmp(av[1], "here_doc", ft_strlen(av[1])) && ac < 6) || ac < 5)
 	{
 		ft_putendl_fd("Invalid arguments", 1);
 		exit(EXIT_FAILURE);
 	}
+	if (!ft_strncmp(av[1], "here_doc", ft_strlen(av[1])))
+	{
+		pipex->here_doc_flag = 1;
+		pipex->lim = ft_strjoin(av[2], "\n");
+	}
+	else
+		pipex->here_doc_flag = 0;
 }
 
 void	search_paths(t_pipex *pipex, char **envp)
