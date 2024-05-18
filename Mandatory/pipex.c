@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:38:57 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:50:49 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int ac, char **av, char **envp)
 		if (cmd->flag == 0)
 			pipex.exit_flag++;
 		pipex.pid = fork();
+		if (pipex.pid == -1)
+			clear_all(&pipex);
 		if (pipex.pid == 0)
 			child(envp, &pipex, cmd);
 		else
