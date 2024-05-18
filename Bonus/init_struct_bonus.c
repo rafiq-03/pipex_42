@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 19:51:42 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/18 17:16:59 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/18 17:40:37 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	init_struct(t_pipex *pipex, int ac, char **av)
 		pipex->pfd[pipex->i] = malloc(2 * sizeof(int));
 		pipex->j = pipe(pipex->pfd[pipex->i]);
 		if (pipex->j == -1)
+		{
 			ft_putendl_fd("fail to create a pipe", 2);
+			exit(EXIT_FAILURE);
+		}
 		pipex->i++;
 	}
 	pipex->i = 0;
