@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:44:01 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/18 17:15:31 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/19 14:56:54 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	hande_here_doc(t_pipex *pipex)
 
 	if (!pipex->here_doc_flag)
 		return ;
+	ft_putstr_fd("> ", 1);
 	line = get_next_line(0);
 	while (1)
 	{
@@ -38,6 +39,7 @@ void	hande_here_doc(t_pipex *pipex)
 			break ;
 		write(pipex->infile_fd, line, ft_strlen(line));
 		free(line);
+		ft_putstr_fd("> ", 1);
 		line = get_next_line(0);
 	}
 	free(pipex->lim);
