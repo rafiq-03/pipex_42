@@ -6,7 +6,7 @@
 #    By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/02 23:16:38 by rmarzouk          #+#    #+#              #
-#    Updated: 2024/05/18 17:41:55 by rmarzouk         ###   ########.fr        #
+#    Updated: 2024/05/19 12:11:16 by rmarzouk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ $(NAME):Mandatory/$(NAME).c $(LIBFT) $(UTILS_O) $(LUTILS_O)
 bonus:$(BNAME)
 
 $(BNAME):Bonus/$(BNAME).c $(LIBFT) $(B_UTILS_O) $(LUTILS_O) $(GNLUTILS_O)
-	@$(CC) $(CFLAGS) $(B_UTILS_O) $(LUTILS_O) $(GNLUTILS_O) Bonus/$(BNAME).c -L$(LIBFT_DIR) -lft -o $(NAME)	
+	@$(CC) $(CFLAGS) $(B_UTILS_O) $(LUTILS_O) $(GNLUTILS_O) Bonus/$(BNAME).c -L$(LIBFT_DIR) -lft -o $(BNAME)	
 	
 #_________________________________________________________
 

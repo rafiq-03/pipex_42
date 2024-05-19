@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:43:32 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/19 12:01:42 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ void		ft_free(char **s);
 t_list		*ft_lstnew(void);
 int			ft_lstsize(t_list *lst);
 t_list		*ft_lstlast(t_list *lst);
-void		ft_lstdelone(t_list *lst, void (*del)(char **, char *));
-void		del(char **command, char *name);
-void		ft_lstclear(t_list **lst, void (*del)(char **, char *));
+void		ft_lstdelone(t_list *lst, void (*del)(char **, char *, int));
+void		del(char **command, char *name, int flag);
+void		ft_lstclear(t_list **lst, void (*del)(char **, char *, int));
 void		ft_lstadd_back(t_list **lst, t_list *new);
 
 #endif

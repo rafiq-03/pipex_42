@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:20:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 22:30:15 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/19 11:53:54 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,11 @@ void	join_with_path(t_pipex *pipex, t_list *node)
 			node->flag = 1;
 			break ;
 		}
-		if (!node->flag && pipex->path[pipex->i + 1])
+		if (!node->flag)
+		{
 			free(node->command[0]);
+			node->command[0] = NULL;
+		}
 	}
 	free(pipex->tmp1);
 }

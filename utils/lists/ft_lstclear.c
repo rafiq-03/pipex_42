@@ -6,13 +6,13 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 21:29:56 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 20:17:16 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/19 12:02:03 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Mandatory/pipex.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(char **, char *))
+void	ft_lstclear(t_list **lst, void (*del)(char **, char *, int))
 {
 	t_list	*current;
 	t_list	*tmp;
