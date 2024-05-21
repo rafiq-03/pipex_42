@@ -27,6 +27,7 @@ int	main(int ac, char **av, char **envp)
 	search_paths(&pipex, envp);
 	init_commands(ac, av, &pipex);
 	fill_fd(&pipex);
+	print_list(&pipex);
 	cmd = pipex.command;
 	while (cmd)
 	{
