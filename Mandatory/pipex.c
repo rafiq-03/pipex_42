@@ -23,7 +23,7 @@ int	main(int ac, char **av, char **envp)
 {
 	t_pipex	pipex;
 	t_list	*cmd;
-	atexit(ll);
+	// atexit(ll);
 	check_command_line(ac);
 	init_struct(&pipex, ac, av);
 	search_paths(&pipex, envp);

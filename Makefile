@@ -23,7 +23,7 @@ CFLAGS= -Wall -Wextra -Werror
 ### LIBFT
 
 LIBFT = libft.a
-LIBFT_DIR = Utils/Libft
+LIBFT_DIR = utils/Libft
 
 ### UTILS
 
@@ -39,7 +39,7 @@ UTILS_S = $(addprefix $(UTILS_DIR), utils.c \
 
 UTILS_O = $(UTILS_S:.c=.o)
 
-LUTILS_DIR = Utils/lists/
+LUTILS_DIR = utils/lists/
 LUTILS_S = $(addprefix $(LUTILS_DIR),	ft_lstadd_back.c\
 										ft_lstclear.c    \
 										ft_lstdelone.c   \
@@ -50,7 +50,7 @@ LUTILS_S = $(addprefix $(LUTILS_DIR),	ft_lstadd_back.c\
 
 LUTILS_O = $(LUTILS_S:.c=.o)
 
-GNLUTILS_DIR = Utils/gnl/
+GNLUTILS_DIR = utils/gnl/
 GNLUTILS_S = $(addprefix $(GNLUTILS_DIR),	get_next_line.c\
 										get_next_line_utils.c\
 									)
