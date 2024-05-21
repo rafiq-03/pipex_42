@@ -6,23 +6,11 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 13:35:28 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/11 21:23:34 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:19:10 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Mandatory/pipex.h"
-
-// t_list	*ft_lstnew(void *content)
-// {
-// 	t_list		*node;
-
-// 	node = malloc (sizeof(t_list));
-// 	if (node == NULL)
-// 		return (NULL);
-// 	node->content = content;
-// 	node->next = NULL;
-// 	return (node);
-// }
+#include "../../Mandatory/pipex.h"
 
 t_list	*ft_lstnew(void)
 {

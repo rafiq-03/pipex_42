@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:44 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/16 20:21:49 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:08:32 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 /*__inlcudes__________________*/
 
-# include "../Libft/libft.h"
+# include "../utils/Libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -26,38 +26,37 @@
 
 typedef struct s_list
 {
-	char			**command;// command extracted frome av[i]
+	char			**command;
 	char			*c_name;
-	int				in_fd;// input fd
-	int				out_fd;// output fd
-	int				flag;// command found or not (1=found)  (0=not found)
+	int				in_fd;
+	int				out_fd;
+	int				flag;
 	int				index;
-	struct s_list	*next;// next node of list
+	struct s_list	*next;
 }			t_list;
 
 typedef struct s_pipex
 {
-	t_list		*command;// store the command in a node
-	char		**path;// when I want to store path var
-	int			path_falg;// check in path is valid or not
-	int			**pfd;// store pipes of commands
-	int			infile_fd;// file discriptor of inputfile
-	int			outfile_fd;// file discriptor of outputfile
-	char		*tmp1;// for saving tmp values
-	char		*tmp2;//same
-	int			i;// this variables for iteration
-	int			j;//same
-	int			pnb;// number of pipes
+	t_list		*command;
+	char		**path;
+	int			path_falg;
+	int			**pfd;
+	int			infile_fd;
+	int			outfile_fd;
+	char		*tmp1;
+	char		*tmp2;
+	int			i;
+	int			j;
+	int			pnb;
 	int			pid;
 	int			exit_flag;
 }			t_pipex;
 
-/*__Macros____________________*/
-
 /*__prototypes________________*/
 
-void		check_command_line(int ac, char **av, char **envp);
+void		check_command_line(int ac);
 void		init_struct(t_pipex *pipex, int ac, char **av);
+void		close_pipes(t_pipex *pipex, int i);
 void		open_in_outfile(t_pipex *pipex, char *in, char *out);
 
 void		search_paths(t_pipex *pipex, char **envp);
@@ -73,6 +72,7 @@ char		**ft_split_command(const char *s, char c);
 size_t		word_len(const char *s, char c);
 int			is_quote(char c);
 char		*between_q(const char *s, int *i, char c);
+void		skip_sapces(const char *s, int *i, char c);
 void		count_in_quote(const char *s, int *count, int *i);
 int			quote_number(const char *s);
 void		child(char **envp, t_pipex *pipex, t_list *cmd);
@@ -89,13 +89,9 @@ void		ft_free(char **s);
 t_list		*ft_lstnew(void);
 int			ft_lstsize(t_list *lst);
 t_list		*ft_lstlast(t_list *lst);
-void		ft_lstdelone(t_list *lst, void (*del)(char **, char *));
-void		del(char **command, char *name); // delete function
-void		ft_lstclear(t_list **lst, void (*del)(char **, char *));
+void		ft_lstdelone(t_list *lst, void (*del)(char **, char *, int));
+void		del(char **command, char *name, int flag);
+void		ft_lstclear(t_list **lst, void (*del)(char **, char *, int));
 void		ft_lstadd_back(t_list **lst, t_list *new);
 
-/*_______________________________________*/
-
-void		print(char **str);
-void		print_list(t_pipex *pipe);
 #endif

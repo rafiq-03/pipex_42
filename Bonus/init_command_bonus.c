@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_command.c                                     :+:      :+:    :+:   */
+/*   init_command_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:20:16 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/19 11:53:54 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/19 11:54:55 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	init_commands(int ac, char **av, t_pipex *pipex)
 {
-	first_command(pipex, av[2]);
+	if (pipex->here_doc_flag)
+	{
+		first_command(pipex, av[3]);
+		pipex->j = 3;
+	}
+	else
+	{
+		first_command(pipex, av[2]);
+		pipex->j = 2;
+	}
 	other_commands(pipex, av, ac);
 }
 
@@ -46,7 +55,6 @@ void	other_commands(t_pipex *pipex, char **av, int ac)
 {
 	t_list	*node;
 
-	pipex->j = 2;
 	while (++pipex->j < ac - 1)
 	{
 		node = ft_lstnew();

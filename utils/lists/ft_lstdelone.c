@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 13:11:36 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/11 22:17:51 by rmarzouk         ###   ########.fr       */
+/*   Created: 2023/12/24 18:59:11 by rmarzouk          #+#    #+#             */
+/*   Updated: 2024/05/19 12:00:47 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Mandatory/pipex.h"
+#include "../../Mandatory/pipex.h"
 
-int	ft_lstsize(t_list *lst)
+void	ft_lstdelone(t_list *lst, void (*del)(char **, char *, int))
+{
+	if (lst && del)
+		del(lst->command, lst->c_name, lst->flag);
+	free(lst);
+}
+
+void	del(char **command, char *name, int flag)
 {
 	int	i;
 
-	i = 0;
-	while (lst != NULL)
-	{
-		lst = lst->next;
-		i++;
-	}
-	return (i);
+	if (flag == 1)
+		i = 0;
+	else
+		i = 1;	
+	if (!command)
+		return ;
+	while (command[i])
+		free(command[i++]);
+	free(command);
+	command = NULL;
+	free(name);
+	name = NULL;
 }

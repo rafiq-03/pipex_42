@@ -6,11 +6,11 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 13:26:59 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/11 21:10:11 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 20:17:22 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Mandatory/pipex.h"
+#include "../../Mandatory/pipex.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {

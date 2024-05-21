@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_command.c                                 :+:      :+:    :+:   */
+/*   ft_split_command_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 12:16:00 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/17 20:10:46 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/17 22:56:01 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 static int	_count_words(const char *s, char c)
 {
