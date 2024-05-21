@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:37:46 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/19 11:54:16 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:09:21 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	child(char **envp, t_pipex *pipex, t_list *cmd)
 	if (-1 == execve(cmd->command[0], cmd->command, envp))
 		perror("bash ");
 	exit(EXIT_FAILURE);
+	printf("hello\n");
 }

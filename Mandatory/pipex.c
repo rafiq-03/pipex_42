@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 20:12:47 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/19 12:07:09 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:45:47 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 void    print(char **str);
 void    print_list(t_pipex *pipe);
+void	ll(void)
+{
+	system("leaks pipex");
+}
 
 int	main(int ac, char **av, char **envp)
 {
 	t_pipex	pipex;
 	t_list	*cmd;
-
+	atexit(ll);
 	check_command_line(ac);
 	init_struct(&pipex, ac, av);
 	search_paths(&pipex, envp);

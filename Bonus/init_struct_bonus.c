@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 19:51:42 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/18 17:40:37 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:10:08 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,14 @@ void	check_open(t_pipex *pipex, char *in, char *out)
 			ft_putendl_fd(": No such file or directory", 2);
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	close_pipes(t_pipex *pipex, int i)
+{
+	int a;
+
+	a = 0;
+	while (a < i)
+		free(pipex->pfd[a++]);
+	free(pipex->pfd);
 }
