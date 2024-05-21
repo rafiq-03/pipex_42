@@ -6,7 +6,7 @@
 /*   By: rmarzouk <rmarzouk@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:37:46 by rmarzouk          #+#    #+#             */
-/*   Updated: 2024/05/19 11:52:12 by rmarzouk         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:58:51 by rmarzouk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ void	child(char **envp, t_pipex *pipex, t_list *cmd)
 	close_all_pipes(pipex->pfd, pipex->pnb);
 	if (-1 == execve(cmd->command[0], cmd->command, envp))
 		perror("bash ");
+	clear_all(pipex);
 	exit(EXIT_FAILURE);
 }
