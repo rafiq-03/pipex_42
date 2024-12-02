@@ -29,5 +29,3 @@
 
 <h2>Conclusion</h2>
 <p>The <strong>pipex</strong> project provides a hands-on opportunity to deepen your understanding of UNIX systems programming and process management. By completing this project, you will gain practical experience in working with file descriptors, processes, and inter-process communication, essential skills for any systems programmer or UNIX/Linux enthusiast.</p>
-<h2>Conclusion</h2>
-<p>The <strong>42 Piscine</strong> is a unique and transformative experience that challenges you to push the boundaries of your coding abilities and personal resilience. Successfully completing the Piscine opens the door to joining 42, where you can further hone your skills and embark on a journey of continuous learning and growth in the field of programming.</p>
